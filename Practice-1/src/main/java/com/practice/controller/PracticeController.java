@@ -5,11 +5,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.practice.model.Employee;
+import com.practice.model.ReadEmployeeDetails;
 
 @RestController
 @RequestMapping("/users")
@@ -28,23 +31,25 @@ public class PracticeController {
 	 *  the records only from 1 to 10 page records then we can use the @QueryParam for fetch the page records based on condition.
 	 *  Url:-http://localhost:8080/users?page=1&limit=5665
 	*/
-	@GetMapping
-	public String queryParam(@RequestParam(value = "page") int page, @RequestParam(value = "limit") int limit) {
-		return "page"+page+","+"limit="+limit;
-		
-	}
+//	@GetMapping("/paramji")
+//	public String queryParam(@RequestParam(value = "page") int page, @RequestParam(value = "limit") int limit) {
+//		return "page"+page+","+"limit="+limit;
+//		
+//	}
+	
+	
 	
 	//(3)   Returning Java object as a value.(Video=22)
-	@GetMapping("/obj")
-	public Employee returnJavaObjAsValue() {
-		Employee employee=new Employee();
-		employee.setAddress("abc");
-		employee.setFirstName("Ritesh");
-		employee.setId(25);
-		employee.setLastName("kumar");
-		return employee;
-	}
-	
+//	@GetMapping(path="/obj",produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_XML_VALUE})
+//	public Employee returnJavaObjAsValue() {
+//		Employee employee=new Employee();
+//		employee.setAddress("abc");
+//		employee.setFirstName("Ritesh");
+//		employee.setId(25);
+//		employee.setLastName("kumar");
+//		return employee;
+//	}
+//	
 	//(4)  Returning Java Object as Json or Xml format both.
 	
 	/* 1. Add produces with path Mapping.
@@ -73,6 +78,20 @@ public class PracticeController {
 		e2.setLastName("uio");
 		return new ResponseEntity<Employee>(HttpStatus.BAD_REQUEST);
 		//return new ResponseEntity<Employee>(e2,HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	//(6) Reading HTTP POST Request Body from Postman.
+	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
+			     produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Employee> readingJsonPayload(@RequestBody ReadEmployeeDetails readEmployeeDetails){
+		Employee e3=new Employee();
+		e3.setAddress(readEmployeeDetails.getAddress());
+		e3.setFirstName(readEmployeeDetails.getAddress());
+		e3.setLastName(readEmployeeDetails.getLastName());
+		e3.setId(readEmployeeDetails.getId());
+		return new ResponseEntity<Employee>(e3,HttpStatus.OK);
+		
 	}
 	
 	
