@@ -82,16 +82,25 @@ public class PracticeController {
 	
 	
 	//(6) Reading HTTP POST Request Body from Postman.
+	
+	/* 1. Create Json Payload and Model class with Json attribute name for accept Request body.
+	 * 2. Keep Consumes and Produces with @PostMapping annotation.
+	 * 3. Set all the attributes value by using accept Model class(Controller class)
+	 * 4. Postman:-BODY:- keep the Json Pay Load Value and
+	 *    HEADERS:- 1. (Key=Accept and Value=application/json), 
+	                2. (key-Content-Type and application/json)
+	*/
+	
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
-			     produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<Employee> readingJsonPayload(@RequestBody ReadEmployeeDetails readEmployeeDetails){
-		Employee e3=new Employee();
-		e3.setAddress(readEmployeeDetails.getAddress());
-		e3.setFirstName(readEmployeeDetails.getAddress());
-		e3.setLastName(readEmployeeDetails.getLastName());
-		e3.setId(readEmployeeDetails.getId());
-		return new ResponseEntity<Employee>(e3,HttpStatus.OK);
-		
+			     produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE} )
+	public ResponseEntity<Employee> readJsonPayLoad(@RequestBody ReadEmployeeDetails readEmployeeDetails )
+	{
+		Employee e4=new Employee();
+		e4.setFirstName(readEmployeeDetails.getFirstName());
+		e4.setLastName(readEmployeeDetails.getLastName());
+		e4.setId(420);
+		e4.setAddress(readEmployeeDetails.getAddress());
+		return new ResponseEntity<Employee>(e4,HttpStatus.OK);
 	}
 	
 	
