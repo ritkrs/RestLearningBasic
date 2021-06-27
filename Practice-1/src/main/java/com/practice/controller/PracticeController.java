@@ -31,25 +31,25 @@ public class PracticeController {
 	 *  the records only from 1 to 10 page records then we can use the @QueryParam for fetch the page records based on condition.
 	 *  Url:-http://localhost:8080/users?page=1&limit=5665
 	*/
-//	@GetMapping("/paramji")
-//	public String queryParam(@RequestParam(value = "page") int page, @RequestParam(value = "limit") int limit) {
-//		return "page"+page+","+"limit="+limit;
-//		
-//	}
+	@GetMapping("/paramji")
+	public String queryParam(@RequestParam(value = "page") int page, @RequestParam(value = "limit") int limit) {
+		return "page"+page+","+"limit="+limit;
+		
+	}
 	
 	
 	
 	//(3)   Returning Java object as a value.(Video=22)
-//	@GetMapping(path="/obj",produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_XML_VALUE})
-//	public Employee returnJavaObjAsValue() {
-//		Employee employee=new Employee();
-//		employee.setAddress("abc");
-//		employee.setFirstName("Ritesh");
-//		employee.setId(25);
-//		employee.setLastName("kumar");
-//		return employee;
-//	}
-//	
+	@GetMapping(path="/obj",produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_XML_VALUE})
+	public Employee returnJavaObjAsValue() {
+		Employee employee=new Employee();
+		employee.setAddress("abc");
+		employee.setFirstName("Ritesh");
+		employee.setId(25);
+		employee.setLastName("kumar");
+		return employee;
+	}
+	
 	//(4)  Returning Java Object as Json or Xml format both.
 	
 	/* 1. Add produces with path Mapping.
